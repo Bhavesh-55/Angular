@@ -56,8 +56,6 @@
     </div>
 
 
-
-     
     <button
       type="submit"
       [disabled]="skillForm.invalid || newSkillName.trim() === ''"
@@ -90,7 +88,12 @@
     @if (skills.length > 0) {
       <div class="skill-grid">
         @for (skill of skills; track skill.id; let index = $index) {
-          <div
+
+          <app-skill-card [skill]="skill" [index]="index" (removeSkill)="removeSkillById($event)" ></app-skill-card>
+          
+          <!-- $event means: The data sent by child event. -->
+
+          <!-- <div
             class="skill-card"
             [class.beginner-skill]="skill.level === 'Beginner'"
             [class.intermediate-skill]="skill.level === 'Intermediate'"
@@ -99,7 +102,7 @@
             <h3>{{ index + 1 }}. {{ skill.name }}</h3>
             <p><strong>Category:</strong> {{ skill.category }}</p>
             <p><strong>Level:</strong> {{ skill.level }}</p>
-          </div>
+          </div> -->
         }
       </div>
     } @else {

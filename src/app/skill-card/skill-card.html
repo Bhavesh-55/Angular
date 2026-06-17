@@ -1,0 +1,16 @@
+<div
+  class="skill-card"
+  [class.beginner-skill]="skill().level === 'Beginner'"
+  [class.intermediate-skill]="skill().level === 'Intermediate'"
+  [class.advanced-skill]="skill().level === 'Advanced'"
+>
+  <h3>{{ index() + 1 }}. {{ skill().name }}</h3>
+
+  <p><strong>Category:</strong> {{ skill().category }}</p>
+
+  <p><strong>Level:</strong> {{ skill().level }}</p>
+
+  <button type="button" class="delete-button" (click)="onRemoveClick()">
+    Delete
+  </button>
+</div>

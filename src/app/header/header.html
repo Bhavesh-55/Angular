@@ -1,9 +1,34 @@
 <header class="header">
-  <h2>My Angular Learning App</h2>
+  <h2>Developer Dashboard</h2>
 
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Profile</a>
-    <a href="#">Contact</a>
+    <a
+      routerLink="/home"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+
+    <a
+      routerLink="/profile"
+      routerLinkActive="active-link"
+    >
+      Profile
+    </a>
+
+    <a
+      routerLink="/skills"
+      routerLinkActive="active-link"
+    >
+      Skills
+    </a>
+
+    <a
+      routerLink="/about"
+      routerLinkActive="active-link"
+    >
+      About
+    </a>
   </nav>
 </header>

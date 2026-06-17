@@ -1,0 +1,36 @@
+.skill-card {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.skill-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.beginner-skill {
+  border-left: 6px solid orange;
+}
+
+.intermediate-skill {
+  border-left: 6px solid blue;
+}
+
+.advanced-skill {
+  border-left: 6px solid green;
+}
+
+.delete-button {
+  padding: 8px 12px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #9a0007;
+}
