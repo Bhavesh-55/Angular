@@ -1,36 +1,38 @@
 .skill-card {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .skill-card h3 {
-  margin-top: 0;
-  color: #333;
+  color: #1976d2;
 }
 
 .beginner-skill {
-  border-left: 6px solid orange;
+  border-left: 6px solid #64b5f6;
 }
 
 .intermediate-skill {
-  border-left: 6px solid blue;
+  border-left: 6px solid #ffb300;
 }
 
 .advanced-skill {
-  border-left: 6px solid green;
+  border-left: 6px solid #43a047;
 }
 
-.delete-button {
+.details-link {
+  display: inline-block;
+  margin-top: 12px;
   padding: 8px 12px;
-  background-color: #d32f2f;
+  background-color: #1976d2;
   color: white;
-  border: none;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
 }
 
-.delete-button:hover {
-  background-color: #9a0007;
+.details-link:hover {
+  background-color: #0d47a1;
 }

@@ -1,37 +1,19 @@
 <section class="skill-section">
-  <h2>My Skills</h2>
+  <h2>My Skills - Data From Spring Boot + MySQL</h2>
 
-  <form class="skill-form" #skillForm="ngForm" (ngSubmit)="addSkill()">
-    <div class="form-row">
+  <div class="filter-section">
+    <h3>Filter Skills From Backend</h3>
 
+    <div class="filter-row">
       <div class="form-control">
-        <label for="skillName">Skill Name</label>
-        <input
-          id="skillName"
-          type="text"
-          name="skillName"
-          placeholder="Enter skill name"
-          required
-          minlength="2"
-          [(ngModel)]="newSkillName"
-          #skillNameInput="ngModel"
-        >
+        <label for="filterCategory">Category</label>
 
-        @if (skillNameInput.invalid && skillNameInput.touched) {
-          <small class="error-message">
-            Skill name is required and must be at least 2 characters.
-          </small>
-        }
-      </div>
-
-      <div class="form-control">
-        <label for="skillCategory">Category</label>
         <select
-          id="skillCategory"
-          name="skillCategory"
-          required
-          [(ngModel)]="newSkillCategory"
+          id="filterCategory"
+          name="filterCategory"
+          [(ngModel)]="selectedCategory"
         >
+          <option value="">All Categories</option>
           <option value="Frontend">Frontend</option>
           <option value="Backend">Backend</option>
           <option value="Cloud">Cloud</option>
@@ -41,74 +23,79 @@
       </div>
 
       <div class="form-control">
-        <label for="skillLevel">Level</label>
+        <label for="filterLevel">Level</label>
+
         <select
-          id="skillLevel"
-          name="skillLevel"
-          required
-          [(ngModel)]="newSkillLevel"
+          id="filterLevel"
+          name="filterLevel"
+          [(ngModel)]="selectedLevel"
         >
+          <option value="">All Levels</option>
           <option value="Beginner">Beginner</option>
           <option value="Intermediate">Intermediate</option>
           <option value="Advanced">Advanced</option>
         </select>
       </div>
+
+      <div class="form-control">
+        <label for="searchText">Search</label>
+
+        <input
+          id="searchText"
+          type="text"
+          name="searchText"
+          placeholder="Search by name, category, level"
+          [(ngModel)]="searchText"
+        >
+      </div>
     </div>
 
+    <div class="filter-actions">
+      <button type="button" (click)="applyFilter()">
+        Apply Filter
+      </button>
 
-    <button
-      type="submit"
-      [disabled]="skillForm.invalid || newSkillName.trim() === ''"
-    >  <!-- property binding example -->   
-      Add Skill
-    </button>
-  </form>
+      <button type="button" (click)="clearFilters()">
+        Clear Filters
+      </button>
 
-  <div class="button-group">
-    <button (click)="toggleSkills()">
-      {{ showSkills ? 'Hide Skills' : 'Show Skills' }}
-    </button>
-
-    <button
-      (click)="removeLastSkill()"
-      [disabled]="skills.length === 0"
-    >
-      Remove Last Skill
-    </button>
-
-    <button
-      (click)="clearSkills()"
-      [disabled]="skills.length === 0"
-    >
-      Clear Skills
-    </button>
+      <button type="button" (click)="refreshSkills()">
+        Refresh From DB
+      </button>
+    </div>
   </div>
 
-  @if (showSkills) {
-    @if (skills.length > 0) {
+  @if (isLoading()) {
+    <p class="loading-message">
+      Loading skills from Spring Boot backend...
+    </p>
+  } @else if (errorMessage()) {
+    <div class="api-error">
+      <p>{{ errorMessage() }}</p>
+
+      <button type="button" (click)="refreshSkills()">
+        Retry
+      </button>
+    </div>
+  } @else {
+    <p class="result-info">
+      Showing {{ skills().length }} skill(s) from MySQL database.
+    </p>
+
+    @if (skills().length > 0) {
       <div class="skill-grid">
-        @for (skill of skills; track skill.id; let index = $index) {
-
-          <app-skill-card [skill]="skill" [index]="index" (removeSkill)="removeSkillById($event)" ></app-skill-card>
-          
-          <!-- $event means: The data sent by child event. -->
-
-          <!-- <div
-            class="skill-card"
-            [class.beginner-skill]="skill.level === 'Beginner'"
-            [class.intermediate-skill]="skill.level === 'Intermediate'"
-            [class.advanced-skill]="skill.level === 'Advanced'"
+        @for (skill of skills(); track skill.id; let index = $index) {
+          <app-skill-card
+            [skill]="skill"
+            [index]="index"
           >
-            <h3>{{ index + 1 }}. {{ skill.name }}</h3>
-            <p><strong>Category:</strong> {{ skill.category }}</p>
-            <p><strong>Level:</strong> {{ skill.level }}</p>
-          </div> -->
+          </app-skill-card>
         }
       </div>
     } @else {
-      <p class="empty-message">No skills available. Please add a skill.</p>
+      <p class="empty-message">
+        No skills found in database for selected filter.
+      </p>
     }
-  } @else {
-    <p class="hidden-message">Skill list is currently hidden.</p>
   }
 </section>

@@ -10,7 +10,15 @@
 
   <p><strong>Level:</strong> {{ skill().level }}</p>
 
-  <button type="button" class="delete-button" (click)="onRemoveClick()">
-    Delete
-  </button>
+  <p>
+    <strong>Description:</strong>
+    {{ skill().description || 'No description available' }}
+  </p>
+
+  <a
+    class="details-link"
+    [routerLink]="['/skills', skill().id]"
+  >
+    View Details
+  </a>
 </div>

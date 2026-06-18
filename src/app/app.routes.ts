@@ -4,6 +4,7 @@ import { ProfilePage } from './pages/profile-page/profile-page';
 import { SkillsPage } from './pages/skills-page/skills-page';
 import { AboutPage } from './pages/about-page/about-page';
 import { NotFound } from './pages/not-found/not-found';
+import {SkillDetailPage} from './pages/skill-detail-page/skill-detail-page';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'skills',
     component: SkillsPage
+  },
+  {
+    path: 'skills/:id',
+    component: SkillDetailPage
   },
   {
     path: 'about',
