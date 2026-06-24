@@ -34,5 +34,71 @@
 
       <p><strong>Updated At:</strong> {{ skill()?.updatedAt || '-' }}</p>
     </div>
+
+    <div class="document-section">
+      <h3>Skill Documents</h3>
+
+      @if (successMessage()) {
+        <p class="success-message">{{ successMessage() }}</p>
+      }
+
+      @if (isAdmin()) {
+        <div class="upload-box">
+          <input
+            type="file"
+            accept=".pdf,.png,.jpg,.jpeg"
+            (change)="onFileSelected($event)"
+          >
+
+          <button
+            type="button"
+            [disabled]="!selectedFile() || isUploading()"
+            (click)="uploadDocument()"
+          >
+            {{ isUploading() ? 'Uploading...' : 'Upload Document' }}
+          </button>
+
+          <small>Allowed: PDF, PNG, JPG. Max size: 5MB.</small>
+        </div>
+      }
+
+      @if (documents().length > 0) {
+        <div class="document-list">
+          @for (document of documents(); track document.id) {
+            <div class="document-card">
+              <div>
+                <strong>{{ document.originalFileName }}</strong>
+
+                <p>
+                  {{ document.contentType }} |
+                  {{ formatFileSize(document.size) }}
+                </p>
+              </div>
+
+              <div class="document-actions">
+                <button
+                  type="button"
+                  (click)="downloadDocument(document)"
+                >
+                  Download
+                </button>
+
+                @if (isAdmin()) {
+                  <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteDocument(document.id)"
+                  >
+                    Delete
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <p>No documents uploaded for this skill.</p>
+      }
+    </div>
   }
 </section>

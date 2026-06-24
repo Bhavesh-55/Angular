@@ -15,10 +15,30 @@
     {{ skill().description || 'No description available' }}
   </p>
 
-  <a
-    class="details-link"
-    [routerLink]="['/skills', skill().id]"
-  >
-    View Details
-  </a>
+  <div class="card-actions">
+    <a
+      class="details-link"
+      [routerLink]="['/skills', skill().id]"
+    >
+      View Details
+    </a>
+  @if (canManageSkill()) {
+    <button
+      type="button"
+      class="edit-button"
+      (click)="onEditClick()"
+    >
+      Edit
+    </button>
+
+    <button
+      type="button"
+      class="delete-button"
+      [disabled]="isDeleting()"
+      (click)="onDeleteClick()"
+    >
+      {{ isDeleting() ? 'Deleting...' : 'Delete' }}
+    </button>
+  }
+  </div>
 </div>

@@ -2,6 +2,14 @@
   <h2>Developer Dashboard</h2>
 
   <nav>
+     @if (currentUser()) {
+      <span>
+        Welcome, {{ currentUser()?.name }} ({{ currentUser()?.role }})
+      </span>
+            <button type="button" (click)="logout()">
+        Logout
+      </button>
+
     <a
       routerLink="/home"
       routerLinkActive="active-link"
@@ -30,5 +38,10 @@
     >
       About
     </a>
+    } @else {
+      <a routerLink="/login">Login</a>
+      <a routerLink="/signup">Signup</a>
+    }
+    
   </nav>
 </header>

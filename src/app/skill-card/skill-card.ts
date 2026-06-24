@@ -12,5 +12,18 @@ export class SkillCard {
 
   skill = input.required<Skill>();
   index = input.required<number>();
+  isDeleting = input(false);
+  canManageSkill = input(false);
+
+  editSkill = output<Skill>();
+  deleteSkill = output<number>();
+
+  onEditClick() {
+    this.editSkill.emit(this.skill());
+  }
+
+  onDeleteClick() {
+    this.deleteSkill.emit(this.skill().id);
+  }
 
 }

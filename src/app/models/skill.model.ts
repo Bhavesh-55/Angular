@@ -29,3 +29,22 @@ export interface ApiErrorResponse {
   path: string;
   validationErrors?: Record<string, string>;
 }
+
+export interface PageResponse<T> {
+  content: T[];
+  pageNumber: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
+  last: boolean;
+}
+
+export interface SkillFilter {
+  category?: string;
+  level?: string;
+  search?: string;
+  page?: number;
+  size?: number;
+  sortBy?: string;
+  sortDir?: string;
+}

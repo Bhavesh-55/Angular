@@ -5,6 +5,9 @@ import { SkillsPage } from './pages/skills-page/skills-page';
 import { AboutPage } from './pages/about-page/about-page';
 import { NotFound } from './pages/not-found/not-found';
 import {SkillDetailPage} from './pages/skill-detail-page/skill-detail-page';
+import { Signup } from './auth/signup/signup';
+import { Login } from './auth/login/login';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -18,19 +21,31 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePage
+    component: ProfilePage,
+    canActivate: [authGuard]
   },
   {
     path: 'skills',
-    component: SkillsPage
+    component: SkillsPage,
+    canActivate: [authGuard]
   },
   {
     path: 'skills/:id',
-    component: SkillDetailPage
+    component: SkillDetailPage,
+    canActivate: [authGuard]
+  },
+    {
+    path: 'login',
+    component: Login
+  },
+  {
+    path: 'signup',
+    component: Signup
   },
   {
     path: 'about',
-    component: AboutPage
+    component: AboutPage,
+    canActivate: [authGuard]
   },
   {
     path: '**',
