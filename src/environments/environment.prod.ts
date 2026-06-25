@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.your-domain.com/api'
+  apiBaseUrl: '/api',
+  apiDocsUrl: '/swagger-ui.html'
 };
